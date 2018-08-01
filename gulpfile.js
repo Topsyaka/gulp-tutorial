@@ -4,6 +4,11 @@ const less = require('gulp-less');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require('./webpack.config.js');
+const del = require('del');
+
+gulp.task('clean', () => {
+  return del(['./dist']);
+});
 
 gulp.task('less', () => {
   return gulp.src('./src/less/main.less')
@@ -23,10 +28,19 @@ gulp.task('js', () => {
     .pipe(webpackStream(webpackConfig), webpack)
     .pipe(gulp.dest('./dist/js'))
 });
+
+gulp.task('allTasks', ['less', 'imageMove', 'js'] ,() => {
+
+});
+
 // task add watcher for js files and add js task to default
-gulp.task('default', ['less', 'imageMove'], () => {
+gulp.task('default', ['clean'], () => {
+  gulp.run('allTasks');
   gulp.watch('./src/less/**/*.less', () => {
     gulp.run('less');
+  });
+  gulp.watch('./src/js/**/*.js', () => {
+    gulp.run('js')
   });
   console.log('gulp default task')
 });
