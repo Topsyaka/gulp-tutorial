@@ -16,5 +16,8 @@ gulp.task('imageMove', () => {
 });
 
 gulp.task('default', ['less', 'imageMove'], () => {
+  gulp.watch('./src/less/**/*.less', () => {
+    gulp.run('less');
+  });
   console.log('gulp default task')
 });
