@@ -6,13 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "gulp",
-    "less": "gulp less"
+    "js": "gulp js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "^6.24.1",
     "gulp": "^3.9.1",
     "gulp-less": "^4.0.1",
     "webpack": "^4.16.3",
