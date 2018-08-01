@@ -1,6 +1,6 @@
+const path = require('path');
 const gulp = require('gulp');
 const less = require('gulp-less');
-const path = require('path');
 
 gulp.task('less', () => {
   return gulp.src('./src/less/main.less')
@@ -10,6 +10,11 @@ gulp.task('less', () => {
     .pipe(gulp.dest('./dist/css'))
 });
 
-gulp.task('default', () => {
+gulp.task('imageMove', () => {
+  return gulp.src('./src/img/**/**.*')
+    .pipe(gulp.dest('./dist/img'))
+});
+
+gulp.task('default', ['less', 'imageMove'], () => {
   console.log('gulp default task')
 });
