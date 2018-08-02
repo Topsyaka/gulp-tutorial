@@ -4,6 +4,7 @@ const less = require('gulp-less');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require('./webpack.config.js');
+const browserSync = require('browser-sync').create();
 const del = require('del');
 
 gulp.task('clean', () => {
@@ -29,12 +30,19 @@ gulp.task('js', () => {
     .pipe(gulp.dest('./dist/js'))
 });
 
-gulp.task('allTasks', ['less', 'imageMove', 'js'] ,() => {
+gulp.task('browser-sync', function() {
+  browserSync.init({
+      server: {
+          baseDir: "./"
+      }
+  });
+});
 
+gulp.task('allTasks', ['less', 'imageMove', 'js'] ,() => {
 });
 
 // task add watcher for js files and add js task to default
-gulp.task('default', ['clean'], () => {
+gulp.task('default', ['clean', 'browser-sync'], () => {
   gulp.run('allTasks');
   gulp.watch('./src/less/**/*.less', () => {
     gulp.run('less');
